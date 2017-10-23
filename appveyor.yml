@@ -7,8 +7,6 @@ environment:
   DOCKER_PASS:
     secure: PyGoV+3PtIghP8om1bvyjg==
 install:
-  - ps: Get-ChildItem env:DOCKER_USER
-  - ps: Get-ChildItem env:DOCKER_PASS
   - docker version
 
 build_script:
@@ -20,5 +18,5 @@ test: off
 #  - docker run monamimani/msbuild
 
 deploy_script:
-  - docker login --u= env:DOCKER_USER --p= env:DOCKER_PASS
+  - docker login --u env:DOCKER_USER --p env:DOCKER_PASS
   - docker push monamimani/msbuild
