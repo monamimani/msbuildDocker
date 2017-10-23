@@ -18,6 +18,7 @@ test: off
 #  - docker run monamimani/msbuild
 
 deploy_script:
+  - ps: Get-ChildItem env:
   - docker login "-u=$env:DOCKER_USER" "-p=$env:DOCKER_PASS"
   #- docker push monamimani/msbuild
   - docker logout
