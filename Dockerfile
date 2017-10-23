@@ -1,6 +1,6 @@
 # Copyright (C) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT license. See LICENSE.txt in the project root for license information.
-FROM microsoft/windowsservercore:10.0.14393.1715
+FROM microsoft/windowsservercore:latest
 SHELL ["powershell.exe", "-ExecutionPolicy", "Bypass", "-Command"]
 
 ENV TEST_CONTAINER=1 \
@@ -35,8 +35,11 @@ RUN $ErrorActionPreference = 'Stop'; \
 # Install Visual Studio Build Tools
 RUN $ErrorActionPreference = 'Stop'; \
     $VerbosePreference = 'Continue'; \
-    $p = Start-Process -Wait -PassThru -FilePath C:\vs_buildtools.exe -ArgumentList '--quiet --nocache --wait --installPath C:\BuildTools'; \
+    $p = Start-Process -Wait -PassThru -FilePath C:\vs_buildtools.exe -ArgumentList '--add Microsoft.VisualStudio.Workload.VCTools --Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.Windows10SDK.16299.Desktop --add Microsoft.VisualStudio.Component.VC.140 --quiet --nocache --wait --installPath C:\BuildTools'; \
     if ($ret = $p.ExitCode) { c:\collect.exe; throw ('Install failed with exit code 0x{0:x}' -f $ret) }
+
+WORKDIR c:\\SourceCode
+
 
 # Use shell form to start developer command prompt and any other commands specified
 SHELL ["cmd.exe", "/s", "/c"]
