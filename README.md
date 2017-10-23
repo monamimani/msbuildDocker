@@ -2,3 +2,28 @@
 # msbuild Docker
 
 Build a Docker image with Visual C++ Build tools.
+
+## Build image
+
+```
+docker build -t msbuild .
+```
+
+## Use the image
+
+```
+docker run -v "$(pwd):C:\SourceCode" msbuild msbuild yourproject.sln /p:Configuration=Release
+```
+
+## Example
+
+```
+git clone https://github.com/monamimani/helloworld.git
+cd helloworld
+docker run -v "$(pwd):C:\code" monamimani/msbuild msbuild helloworld.sln /p:Configuration=Release
+dir helloworld.exe
+```
+
+## Reference
+- [Installing Build Tools for Visual Studio 2017 in a Docker container](https://blogs.msdn.microsoft.com/heaths/2017/09/18/installing-build-tools-for-visual-studio-2017-in-a-docker-container/?utm_source=t.co&utm_medium=referral) by Heath Stewart
+  - [Dockerfile](https://gist.github.com/heaths/a81048f5eb6f1476e49ca2783d31a836#file-dockerfile)
