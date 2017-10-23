@@ -1,8 +1,8 @@
-version: 1.0.{build}
+version: 0.0.{build}
 image: Visual Studio 2017
 
 environment:
-  DOCKER_USER:
+  DOCKER_USER: 
     secure: MIcFLX1viOzK5VYXq4XSoy6zxoDYX9alPhMsqYyCwhA=
   DOCKER_PASS:
     secure: PyGoV+3PtIghP8om1bvyjg==
@@ -18,5 +18,5 @@ test_script:
   - docker run monamimani/msbuild
 
 deploy_script:
-  - docker login -u=$env:DOCKER_USER -p=$env:DOCKER_PASS
+  - docker login -u=env:DOCKER_USER -p=env:DOCKER_PASS
   - docker push monamimani/msbuild
