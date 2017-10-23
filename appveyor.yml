@@ -3,7 +3,7 @@ image: Visual Studio 2017
 
 environment:
   DOCKER_USER: 
-    secure: MIcFLX1viOzK5VYXq4XSoy6zxoDYX9alPhMsqYyCwhA=
+    secure: ZSRDBZxEwolrrD6xli1Vtg==
   DOCKER_PASS:
     secure: PyGoV+3PtIghP8om1bvyjg==
 install:
