@@ -12,11 +12,10 @@ install:
 build_script:
   - docker build -t monamimani/msbuild .
 
-test: off
-
-#test_script:
-#  - docker run monamimani/msbuild
+test_script:
+  - docker run monamimani/msbuild
 
 deploy_script:
-  - docker login --u env:DOCKER_USER --p env:DOCKER_PASS
+  - docker login -u env:DOCKER_USER -p env:DOCKER_PASS
   - docker push monamimani/msbuild
+  - docker logout
