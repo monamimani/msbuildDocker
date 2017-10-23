@@ -47,4 +47,4 @@ SHELL ["cmd.exe", "/s", "/c"]
 ENTRYPOINT C:\BuildTools\Common7\Tools\VsDevCmd.bat &&
 
 # Default to PowerShell console running within developer command prompt environment
-CMD ["powershell.exe", "-nologo"]
+#CMD ["powershell.exe", "-nologo"]
