@@ -20,6 +20,6 @@ test: off
 deploy_script:
  - ps: Get-ChildItem env:DOCKER_USER
  # - ps: Get-ChildItem "$env:DOCKER_PASS"
- - docker login -u=monamimani -p=Carpe151Diem
+ - docker login -u="$env:DOCKER_PASS" -p=Carpe151Diem
  #- docker push monamimani/msbuild
  - docker logout
