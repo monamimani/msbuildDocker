@@ -9,11 +9,13 @@ environment:
 install:
   - docker version
 
-build_script:
-  #- docker build -t monamimani/msbuild .
+build: off
+#build_script:
+#  - docker build -t monamimani/msbuild .
 
-test_script:
- # - docker run monamimani/msbuild
+test: off
+#test_script:
+#  - docker run monamimani/msbuild
 
 deploy_script:
   - docker login -u="$env:DOCKER_USER" -p="$env:DOCKER_PASS"
