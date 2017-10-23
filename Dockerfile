@@ -33,9 +33,10 @@ RUN $ErrorActionPreference = 'Stop'; \
     if ((Get-FileHash -Path C:\vs_buildtools.exe -Algorithm SHA256).Hash -ne $env:VS_BUILDTOOLS_SHA256) { throw 'Download hash does not match' }
 
 # Install Visual Studio Build Tools
+#--add Microsoft.VisualStudio.Component.Windows10SDK.14393
 RUN $ErrorActionPreference = 'Stop'; \
     $VerbosePreference = 'Continue'; \
-    $p = Start-Process -Wait -PassThru -FilePath C:\vs_buildtools.exe -ArgumentList '--add Microsoft.VisualStudio.Workload.VCTools --Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.Windows10SDK.16299.Desktop --add Microsoft.VisualStudio.Component.VC.140 --quiet --nocache --wait --installPath C:\BuildTools'; \
+    $p = Start-Process -Wait -PassThru -FilePath C:\vs_buildtools.exe -ArgumentList '--add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.VC.140 --quiet --nocache --wait --installPath C:\BuildTools'; \
     if ($ret = $p.ExitCode) { c:\collect.exe; throw ('Install failed with exit code 0x{0:x}' -f $ret) }
 
 WORKDIR c:\\SourceCode
