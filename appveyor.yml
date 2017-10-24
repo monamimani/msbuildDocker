@@ -10,17 +10,15 @@ install:
   - ps: Get-ChildItem env:DOCKER_USER
   - docker version
 
-build: off
-#build_script:
-#  - docker build -t monamimani/msbuild .
+build_script:
+  - docker build -t monamimani/msbuild .
 
-test: off
-#test_script:
-#  - docker run monamimani/msbuild
+test_script:
+  - docker run monamimani/msbuild
 
 deploy_script:
  - ps: Get-ChildItem env:DOCKER_USER
  - ps: Get-ChildItem env:DOCKER_PASS
  - docker login -u=%DOCKER_USER% -p=%DOCKER_PASS%
- #- docker push monamimani/msbuild
+ - docker push monamimani/msbuild
  - docker logout
