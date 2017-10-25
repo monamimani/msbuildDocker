@@ -20,7 +20,7 @@ RUN $ErrorActionPreference = 'Stop'; \
     if ($ret = $p.ExitCode) { c:\TEMP\collect.exe; throw ('Install failed with exit code 0x{0:x}' -f $ret) }
 
 # Add C:\Bin to PATH
-RUN $env:Path += ";C:\Bin"
+# RUN $env:Path += ";C:\Bin"
 
 WORKDIR c:\\SourceCode
 
