@@ -9,8 +9,9 @@ environment:
 install:
   - ps: docker version
 
-build_script:
-  - ps: docker build -t monamimani/msbuild .
+build: off
+#build_script:
+#  - ps: docker build -t monamimani/msbuild .
 
 test: off
 #test_script:
