@@ -3,41 +3,27 @@
 FROM microsoft/windowsservercore:latest
 SHELL ["powershell.exe", "-ExecutionPolicy", "Bypass", "-Command"]
 
-ENV TEST_CONTAINER=1 \
-    VS_CHANNEL_URI=https://aka.ms/vs/15/release/799c44140/channel \
-    VS_BUILDTOOLS_URI=https://aka.ms/vs/15/release/799c44140/vs_buildtools.exe \
-    VS_BUILDTOOLS_SHA256=FA29EB83297AECADB0C4CD41E54512C953164E64EEDD9FB9D3BF9BD70C9A2D29 \
-    NUGET_URI=https://dist.nuget.org/win-x86-commandline/v4.1.0/nuget.exe \
-    NUGET_SHA256=4C1DE9B026E0C4AB087302FF75240885742C0FAA62BD2554F913BBE1F6CB63A0
+# Use the latest Windows Server Core image.
+FROM microsoft/windowsservercore
 
-# Download nuget.exe
-RUN $ErrorActionPreference = 'Stop'; \
-    $ProgressPreference = 'SilentlyContinue'; \
-    $VerbosePreference = 'Continue'; \
-    New-Item -Path C:\bin -Type Directory | Out-Null; \
-    [System.Environment]::SetEnvironmentVariable('PATH', "\"${env:PATH};C:\bin\"", 'Machine'); \
-    Invoke-WebRequest -Uri $env:NUGET_URI -OutFile C:\bin\nuget.exe; \
-    if ((Get-FileHash -Path C:\bin\nuget.exe -Algorithm SHA256).Hash -ne $env:NUGET_SHA256) { throw 'Download hash does not match' }
+# Download useful tools to C:\Bin.
+ADD https://dist.nuget.org/win-x86-commandline/v4.1.0/nuget.exe C:\\Bin\\nuget.exe
+
+# Download the Build Tools bootstrapper outside of the PATH.
+ADD https://aka.ms/vs/15/release/vs_buildtools.exe C:\\TEMP\\vs_buildtools.exe
 
 # Download log collection utility
-RUN $ErrorActionPreference = 'Stop'; \
-    $ProgressPreference = 'SilentlyContinue'; \
-    $VerbosePreference = 'Continue'; \
-    Invoke-WebRequest -Uri https://aka.ms/vscollect.exe -OutFile C:\collect.exe
+ADD https://aka.ms/vscollect.exe C:\\TEMP\\collect.exe
 
-# Download vs_buildtools.exe
-RUN $ErrorActionPreference = 'Stop'; \
-    $ProgressPreference = 'SilentlyContinue'; \
-    $VerbosePreference = 'Continue'; \
-    Invoke-WebRequest -Uri $env:VS_BUILDTOOLS_URI -OutFile C:\vs_buildtools.exe; \
-    if ((Get-FileHash -Path C:\vs_buildtools.exe -Algorithm SHA256).Hash -ne $env:VS_BUILDTOOLS_SHA256) { throw 'Download hash does not match' }
+# Add C:\Bin to PATH
+RUN setx /m PATH "%PATH%;C:\Bin"
 
 # Install Visual Studio Build Tools
 #--add Microsoft.VisualStudio.Component.Windows10SDK.14393
 RUN $ErrorActionPreference = 'Stop'; \
     $VerbosePreference = 'Continue'; \
-    $p = Start-Process -Wait -PassThru -FilePath C:\vs_buildtools.exe -ArgumentList '--add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.VC.140 --quiet --nocache --wait --installPath C:\BuildTools'; \
-    if ($ret = $p.ExitCode) { c:\collect.exe; throw ('Install failed with exit code 0x{0:x}' -f $ret) }
+    $p = Start-Process -Wait -PassThru -FilePath C:\TEMP\vs_buildtools.exe -ArgumentList '--add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.VC.140 --quiet --nocache --wait --installPath C:\BuildTools'; \
+    if ($ret = $p.ExitCode) { c:\TEMP\collect.exe; throw ('Install failed with exit code 0x{0:x}' -f $ret) }
 
 WORKDIR c:\\SourceCode
 
