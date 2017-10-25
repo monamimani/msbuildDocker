@@ -10,7 +10,7 @@ install:
   - ps: docker version
 
 build_script:
- - ps: docker build -t -m 2GB monamimani/msbuild .
+ - ps: docker build -m 2GB -t monamimani/msbuild .
 
 test_script:
   - docker run monamimani/msbuild
