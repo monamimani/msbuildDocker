@@ -27,3 +27,6 @@ dir helloworld.exe
 ## Reference
 - [Installing Build Tools for Visual Studio 2017 in a Docker container](https://blogs.msdn.microsoft.com/heaths/2017/09/18/installing-build-tools-for-visual-studio-2017-in-a-docker-container/?utm_source=t.co&utm_medium=referral) by Heath Stewart
   - [Dockerfile](https://gist.github.com/heaths/a81048f5eb6f1476e49ca2783d31a836#file-dockerfile)
+- [Install Build Tools into a Container](https://docs.microsoft.com/en-us/visualstudio/install/build-tools-container)
+- [Advanced Example for Containers](https://docs.microsoft.com/en-us/visualstudio/install/advanced-build-tools-container)
+- [Known issues for containers](https://docs.microsoft.com/en-us/visualstudio/install/build-tools-container-issues)
