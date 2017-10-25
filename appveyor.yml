@@ -13,9 +13,8 @@ build: off
 #build_script:
 #  - ps: docker build -t monamimani/msbuild .
 
-test: off
-#test_script:
-#  - docker run monamimani/msbuild
+test_script:
+  - docker run monamimani/msbuild -m 2GB
 
 deploy_script:
  - ps: docker login -u="$env:DOCKER_USER" -p="$env:DOCKER_PASS"
