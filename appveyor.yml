@@ -12,7 +12,7 @@ install:
 build_script:
   - docker build -t monamimani/msbuild .
 
-test:off
+test: off
 #test_script:
 #  - docker run monamimani/msbuild
 
