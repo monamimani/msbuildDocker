@@ -40,7 +40,7 @@ RUN dir
 # Add C:\Bin to PATH
 # RUN $env:Path += ";C:\Bin"
 
-COPY . .
+COPY .\Bin c:\BinImage
 RUN dir
 FROM microsoft/nanoserver
 
