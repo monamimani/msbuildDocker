@@ -23,11 +23,7 @@ ADD https://aka.ms/vscollect.exe C:\\TEMP\\collect.exe
 # Download the Build Tools bootstrapper outside of the PATH.
 ADD https://aka.ms/vs/15/release/vs_buildtools.exe C:\\TEMP\\vs_buildtools.exe
 
-RUN $BuildToolsVer = (get-item C:\\TEMP\\vs_buildtools.exe).VersionInfo | % FileVersion
-
-# Add version label
-LABEL "monamimani.version"="Bootstrapper15.3.26730.12"
-LABEL "monamimani.versionTest"="$BuildToolsVer"
+RUN $env:BuildToolsVer = (get-item C:\\TEMP\\vs_buildtools.exe).VersionInfo | % FileVersion
 
 # Install Visual Studio Build Tools
 # RUN $ErrorActionPreference = 'Stop'; \
@@ -42,6 +38,10 @@ FROM microsoft/nanoserver
 
 # COPY --from=SetupPhase C:\BuildTools\ C:\BuildTools\
 COPY --from=SetupPhase C:\\Bin C:\\Bin
+
+# Add version label
+LABEL "monamimani.version"="Bootstrapper15.3.26730.12"
+LABEL "monamimani.versionTest"="$env:BuildToolsVer"
 
 WORKDIR c:\\SourceCode
 
