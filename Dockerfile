@@ -26,9 +26,9 @@ ADD https://aka.ms/vs/15/release/vs_buildtools.exe C:\\TEMP\\vs_buildtools.exe
 RUN $env:BuildToolsVer = (get-item C:\\TEMP\\vs_buildtools.exe).VersionInfo | % FileVersion
 
 # Install Visual Studio Build Tools
- RUN $VerbosePreference = 'Continue'; `
-    $p = Start-Process -Wait -PassThru -FilePath C:\TEMP\vs_buildtools.exe -ArgumentList '--add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.VC.140 --add Microsoft.VisualStudio.Component.Windows10SDK.15063.Desktop --quiet --nocache --wait --installPath C:\BuildTools'; `
-    if ($ret = $p.ExitCode) { c:\TEMP\collect.exe; throw ('Install failed with exit code 0x{0:x}' -f $ret) }
+# RUN $VerbosePreference = 'Continue'; `
+#    $p = Start-Process -Wait -PassThru -FilePath C:\TEMP\vs_buildtools.exe -ArgumentList '--add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.VC.140 --add Microsoft.VisualStudio.Component.Windows10SDK.15063.Desktop --quiet --nocache --wait --installPath C:\BuildTools'; `
+#    if ($ret = $p.ExitCode) { c:\TEMP\collect.exe; throw ('Install failed with exit code 0x{0:x}' -f $ret) }
 
 # Add C:\Bin to PATH
 # RUN $env:Path += ";C:\Bin"
@@ -36,8 +36,8 @@ RUN $env:BuildToolsVer = (get-item C:\\TEMP\\vs_buildtools.exe).VersionInfo | % 
 FROM microsoft/nanoserver
 
 COPY --from=SetupPhase C:\\BuildTools C:\\BuildTools
-COPY --from=SetupPhase \"C:\Program Files (x86)\" \"C:\Program Files (x86)\"
-COPY --from=SetupPhase \"C:\Program Files\" \"C:\Program Files\"
+COPY --from=SetupPhase ["C:\Program Files (x86)", "C:\Program Files (x86)"]
+COPY --from=SetupPhase ["C:\Program Files", "C:\Program Files"]
 COPY --from=SetupPhase C:\\Bin C:\\Bin
 
 # Add version label
