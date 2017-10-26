@@ -12,10 +12,8 @@ ADD https://aka.ms/vs/15/release/vs_buildtools.exe C:\\TEMP\\vs_buildtools.exe
 # Download log collection utility
 ADD https://aka.ms/vscollect.exe C:\\TEMP\\collect.exe
 
-RUN $env:buildTools = (Get-Command C:\\TEMP\\vs_buildtools.exe).Version
-
 # Add version label
-LABEL "monamimani.version"= $env:buildTools
+LABEL "monamimani.version"= "1.0"
 
 # Install Visual Studio Build Tools
 #--add Microsoft.VisualStudio.Component.Windows10SDK.14393
