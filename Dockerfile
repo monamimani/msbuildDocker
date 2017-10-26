@@ -1,7 +1,7 @@
 # Copyright (C) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT license. See LICENSE.txt in the project root for license information.
 FROM microsoft/windowsservercore:latest  as SetupPhase
-SHELL ["powershell.exe", "-ExecutionPolicy", "Bypass", "-Command"]
+SHELL ["powershell.exe", "-ExecutionPolicy", "Bypass", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
 # Download Build Tools 15.4.27004.2005 and other useful tools.
 ENV VS_BUILDTOOLS_URI=https://aka.ms/vs/15/release/6e8971476/vs_buildtools.exe \
@@ -39,6 +39,8 @@ RUN $ErrorActionPreference = 'Stop'; \
 
 # Add C:\Bin to PATH
 # RUN $env:Path += ";C:\Bin"
+
+COPY C:\\Bin C:\\Bin
 
 FROM microsoft/nanoserver
 
