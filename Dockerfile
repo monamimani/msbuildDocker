@@ -9,11 +9,14 @@ ADD https://dist.nuget.org/win-x86-commandline/v4.1.0/nuget.exe C:\\Bin\\nuget.e
 # Download the Build Tools bootstrapper outside of the PATH.
 ADD https://aka.ms/vs/15/release/vs_buildtools.exe C:\\TEMP\\vs_buildtools.exe
 
+RUN $BuildToolsVer = (get-item .\vs_BuildTools.exe).VersionInfo | % FileVersion
+
 # Download log collection utility
 ADD https://aka.ms/vscollect.exe C:\\TEMP\\collect.exe
 
 # Add version label
 LABEL "monamimani.version"="Bootstrapper15.3.26730.12"
+LABEL "monamimani.versionTest"=$BuildToolsVer
 
 # Install Visual Studio Build Tools
 RUN $ErrorActionPreference = 'Stop'; \
@@ -27,6 +30,7 @@ RUN $ErrorActionPreference = 'Stop'; \
 FROM microsoft/nanoserver
 
 COPY --from=SetupPhase C:\BuildTools\ C:\BuildTools\
+
 COPY --from=SetupPhase C:\Bin\ C:\Bin\
 
 WORKDIR c:\\SourceCode
