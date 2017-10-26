@@ -41,7 +41,7 @@ WORKDIR c:\\
 RUN pwd
 RUN dir
 
-COPY c:\\Bin c:\\BinImage
+COPY .\\Bin c:\\BinImage
 
 RUN dir
 
