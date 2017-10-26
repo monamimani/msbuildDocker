@@ -23,14 +23,13 @@ ADD https://aka.ms/vscollect.exe C:\\TEMP\\collect.exe
 # Download the Build Tools bootstrapper outside of the PATH.
 ADD https://aka.ms/vs/15/release/vs_buildtools.exe C:\\TEMP\\vs_buildtools.exe
 
-RUN $env:BuildToolsVer = (get-item C:\\TEMP\\vs_buildtools.exe).VersionInfo | % FileVersion
-
-RUN Write-Host $env:BuildToolsVer
+WORKDIR c:\\TEMP\\
+RUN (get-item C:\\TEMP\\vs_buildtools.exe).VersionInfo | % FileVersion > C:\\TEMP\\BuildToolsVer
 
 # Install Visual Studio Build Tools
- RUN $VerbosePreference = 'Continue'; `
-    $p = Start-Process -Wait -PassThru -FilePath C:\TEMP\vs_buildtools.exe -ArgumentList '--add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.VC.140 --add Microsoft.VisualStudio.Component.Windows10SDK.15063.Desktop --quiet --nocache --wait --installPath C:\BuildTools'; `
-    if ($ret = $p.ExitCode) { c:\TEMP\collect.exe; throw ('Install failed with exit code 0x{0:x}' -f $ret) }
+# RUN $VerbosePreference = 'Continue'; `
+#    $p = Start-Process -Wait -PassThru -FilePath C:\TEMP\vs_buildtools.exe -ArgumentList '--add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.VC.140 --add Microsoft.VisualStudio.Component.Windows10SDK.15063.Desktop --quiet --nocache --wait --installPath C:\BuildTools'; `
+#    if ($ret = $p.ExitCode) { c:\TEMP\collect.exe; throw ('Install failed with exit code 0x{0:x}' -f $ret) }
 
 # Add C:\Bin to PATH
 # RUN $env:Path += ";C:\Bin"
