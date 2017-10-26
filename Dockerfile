@@ -1,6 +1,6 @@
 # Copyright (C) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT license. See LICENSE.txt in the project root for license information.
-FROM microsoft/windowsservercore:latest
+FROM microsoft/windowsservercore:latest  as SetupPhase
 SHELL ["powershell.exe", "-ExecutionPolicy", "Bypass", "-Command"]
 
 # Download useful tools to C:\Bin.
@@ -23,6 +23,11 @@ RUN $ErrorActionPreference = 'Stop'; \
 
 # Add C:\Bin to PATH
 # RUN $env:Path += ";C:\Bin"
+
+FROM microsoft/nanoserver
+
+COPY --from=SetupPhase C:\BuildTools C:\BuildTools
+COPY --from=SetupPhase C:\Bin\ C:\Bin\
 
 WORKDIR c:\\SourceCode
 
