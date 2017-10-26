@@ -18,19 +18,19 @@ RUN $ErrorActionPreference = 'Stop'; \
     [System.Environment]::SetEnvironmentVariable('PATH', "\"${env:PATH};C:\bin\"", 'Machine'); \
     Invoke-WebRequest -Uri $env:NUGET_URI -OutFile C:\bin\nuget.exe; \
     if ((Get-FileHash -Path C:\bin\nuget.exe -Algorithm SHA256).Hash -ne $env:NUGET_SHA256) { throw 'Download hash does not match' }
-RUN dir
+#RUN dir
 # Download log collection utility
-ADD https://aka.ms/vscollect.exe C:\\TEMP\\collect.exe
+#ADD https://aka.ms/vscollect.exe C:\\TEMP\\collect.exe
 
 # Download the Build Tools bootstrapper outside of the PATH.
-ADD https://aka.ms/vs/15/release/vs_buildtools.exe C:\\TEMP\\vs_buildtools.exe
+#ADD https://aka.ms/vs/15/release/vs_buildtools.exe C:\\TEMP\\vs_buildtools.exe
 
-RUN $BuildToolsVer = (get-item C:\\TEMP\\vs_buildtools.exe).VersionInfo | % FileVersion
+#RUN $BuildToolsVer = (get-item C:\\TEMP\\vs_buildtools.exe).VersionInfo | % FileVersion
 
 # Add version label
-LABEL "monamimani.version"="Bootstrapper15.3.26730.12"
-LABEL "monamimani.versionTest"="$BuildToolsVer"
-RUN dir
+#LABEL "monamimani.version"="Bootstrapper15.3.26730.12"
+#LABEL "monamimani.versionTest"="$BuildToolsVer"
+#RUN dir
 # Install Visual Studio Build Tools
 # RUN $ErrorActionPreference = 'Stop'; \
 #    $VerbosePreference = 'Continue'; \
