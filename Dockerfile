@@ -31,7 +31,7 @@ FROM microsoft/nanoserver
 
 # COPY --from=SetupPhase C:\BuildTools\ C:\BuildTools\
 
-COPY --from=SetupPhase ["C:\\Bin\\", "C:\\Bin\\"]
+COPY --from=SetupPhase ["C:\\Bin", "C:\\Bin"]
 
 WORKDIR c:\\SourceCode
 
