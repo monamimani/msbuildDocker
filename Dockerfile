@@ -2,7 +2,7 @@
 
 FROM microsoft/windowsservercore:latest  as SetupPhase
 SHELL ["powershell.exe", "-ExecutionPolicy", "Bypass", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
-
+RUN pwd
 # Download Build Tools 15.4.27004.2005 and other useful tools.
 ENV VS_BUILDTOOLS_URI=https://aka.ms/vs/15/release/6e8971476/vs_buildtools.exe `
     VS_BUILDTOOLS_SHA256=D482171C7F2872B6B9D29B116257C6102DBE6ABA481FAE4983659E7BF67C0F88 `
@@ -38,7 +38,7 @@ RUN dir
 # Add C:\Bin to PATH
 # RUN $env:Path += ";C:\Bin"
 WORKDIR c:\\
-
+RUN pwd
 RUN dir
 
 COPY c:\\Bin c:\\BinImage
