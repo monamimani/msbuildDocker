@@ -5,7 +5,7 @@ SHELL ["powershell.exe", "-ExecutionPolicy", "Bypass", "-Command"]
 
 # Download useful tools to C:\Bin.
 ADD https://dist.nuget.org/win-x86-commandline/v4.1.0/nuget.exe C:\\Bin\\nuget.exe
-
+RUN dir
 # Download log collection utility
 ADD https://aka.ms/vscollect.exe C:\\TEMP\\collect.exe
 
@@ -17,7 +17,7 @@ RUN $BuildToolsVer = (get-item C:\\TEMP\\vs_buildtools.exe).VersionInfo | % File
 # Add version label
 LABEL "monamimani.version"="Bootstrapper15.3.26730.12"
 LABEL "monamimani.versionTest"="$BuildToolsVer"
-
+RUN dir
 # Install Visual Studio Build Tools
 # RUN $ErrorActionPreference = 'Stop'; \
 #    $VerbosePreference = 'Continue'; \
@@ -30,7 +30,7 @@ LABEL "monamimani.versionTest"="$BuildToolsVer"
 FROM microsoft/nanoserver
 
 # COPY --from=SetupPhase C:\BuildTools\ C:\BuildTools\
-
+RUN dir
 COPY --from=SetupPhase ["C:\\Bin", "C:\\Bin"]
 
 WORKDIR c:\\SourceCode
