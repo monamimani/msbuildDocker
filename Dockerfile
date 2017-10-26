@@ -12,6 +12,9 @@ ADD https://aka.ms/vs/15/release/vs_buildtools.exe C:\\TEMP\\vs_buildtools.exe
 # Download log collection utility
 ADD https://aka.ms/vscollect.exe C:\\TEMP\\collect.exe
 
+# Add version label
+LABEL version="1.0"
+
 # Install Visual Studio Build Tools
 #--add Microsoft.VisualStudio.Component.Windows10SDK.14393
 RUN $ErrorActionPreference = 'Stop'; \
