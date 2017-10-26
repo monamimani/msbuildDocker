@@ -9,7 +9,7 @@ ADD https://dist.nuget.org/win-x86-commandline/v4.1.0/nuget.exe C:\\Bin\\nuget.e
 # Download the Build Tools bootstrapper outside of the PATH.
 ADD https://aka.ms/vs/15/release/vs_buildtools.exe C:\\TEMP\\vs_buildtools.exe
 
-RUN $BuildToolsVer = (get-item .\vs_BuildTools.exe).VersionInfo | % FileVersion
+RUN $BuildToolsVer = (get-item C:\\TEMP\\vs_buildtools.exe).VersionInfo | % FileVersion
 
 # Download log collection utility
 ADD https://aka.ms/vscollect.exe C:\\TEMP\\collect.exe
