@@ -35,7 +35,7 @@ RUN $env:BuildToolsVer = (get-item C:\\TEMP\\vs_buildtools.exe).VersionInfo | % 
 
 FROM microsoft/nanoserver
 
-COPY --from=SetupPhase C:\\BuildTools C:\\BuildTools
+#COPY --from=SetupPhase C:\\BuildTools C:\\BuildTools
 COPY --from=SetupPhase ["C:\Program Files (x86)", "C:\Program Files (x86)"]
 COPY --from=SetupPhase ["C:\Program Files", "C:\Program Files"]
 COPY --from=SetupPhase C:\\Bin C:\\Bin
