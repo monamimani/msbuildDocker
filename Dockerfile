@@ -41,15 +41,14 @@ WORKDIR c:\\
 RUN pwd
 RUN dir
 
-COPY .\\Bin c:\\BinImage
-
 RUN dir
 
 FROM microsoft/nanoserver
 
 # COPY --from=SetupPhase C:\BuildTools\ C:\BuildTools\
 RUN dir
-COPY --from=SetupPhase ["C:\\Bin", "C:\\Bin"]
+
+COPY --from=SetupPhase C:\\Bin C:\\Bin
 
 WORKDIR c:\\SourceCode
 
