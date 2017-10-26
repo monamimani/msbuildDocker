@@ -15,8 +15,8 @@ build_script:
  - ps: $ImgVer = & docker inspect --format '{{index .Config.Labels \"monamimani.version\"}}' monamimani/msbuild
  - ps: |
     {
-      dir
-      docker tag monamimani/msbuild monamimani/msbuild:"$ImgVer"
+      BuildToolVer=$(cat C:\\TEMP\\BuildToolVer)
+      docker tag monamimani/msbuild monamimani/msbuild:$BuildToolVer
     }
 
 test_script:
