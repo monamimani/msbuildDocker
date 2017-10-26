@@ -17,9 +17,9 @@ build_script:
 test_script:
   - docker images
   - docker run monamimani/msbuild
-  - git clone https://github.com/monamimani/helloworld.git build
-  - cd build
-  - ps: docker run -v "$(pwd):C:\SourceCode" monamimani/msbuild msbuild helloworld.sln /p:Configuration=Release
+#  - git clone https://github.com/monamimani/helloworld.git build
+#  - cd build
+#  - ps: docker run -v "$(pwd):C:\SourceCode" monamimani/msbuild msbuild helloworld.sln /p:Configuration=Release
   
 
 deploy_script:
