@@ -18,7 +18,7 @@ RUN $ErrorActionPreference = 'Stop'; \
     [System.Environment]::SetEnvironmentVariable('PATH', "\"${env:PATH};C:\bin\"", 'Machine'); \
     Invoke-WebRequest -Uri $env:NUGET_URI -OutFile C:\bin\nuget.exe; \
     if ((Get-FileHash -Path C:\bin\nuget.exe -Algorithm SHA256).Hash -ne $env:NUGET_SHA256) { throw 'Download hash does not match' }
-#RUN dir
+RUN dir
 # Download log collection utility
 #ADD https://aka.ms/vscollect.exe C:\\TEMP\\collect.exe
 
@@ -40,8 +40,8 @@ RUN $ErrorActionPreference = 'Stop'; \
 # Add C:\Bin to PATH
 # RUN $env:Path += ";C:\Bin"
 
-COPY C:\\Bin C:\\Bin
-
+COPY . .
+RUN dir
 FROM microsoft/nanoserver
 
 # COPY --from=SetupPhase C:\BuildTools\ C:\BuildTools\
