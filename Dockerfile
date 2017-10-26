@@ -25,7 +25,7 @@ ADD https://aka.ms/vs/15/release/vs_buildtools.exe C:\\TEMP\\vs_buildtools.exe
 
 RUN $env:BuildToolsVer = (get-item C:\\TEMP\\vs_buildtools.exe).VersionInfo | % FileVersion
 
-RUN $env:BuildToolsVer
+RUN Write-Host $env:BuildToolsVer
 
 # Install Visual Studio Build Tools
  RUN $VerbosePreference = 'Continue'; `
