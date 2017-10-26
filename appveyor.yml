@@ -13,6 +13,7 @@ build_script:
  - ps: docker build -m 2GB -t monamimani/msbuild .
 
 test_script:
+  - docker inspect --format "{{ index .Config.Labels \"version\"}}" monamimani/msbuild
   - docker images
   - docker run monamimani/msbuild
 
