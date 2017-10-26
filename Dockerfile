@@ -1,5 +1,5 @@
-# Copyright (C) Microsoft Corporation. All rights reserved.
-# Licensed under the MIT license. See LICENSE.txt in the project root for license information.
+# escape=`
+
 FROM microsoft/windowsservercore:latest  as SetupPhase
 SHELL ["powershell.exe", "-ExecutionPolicy", "Bypass", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
