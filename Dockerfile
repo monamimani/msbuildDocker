@@ -40,9 +40,13 @@ RUN dir
 # Add C:\Bin to PATH
 # RUN $env:Path += ";C:\Bin"
 WORKDIR c:\\
+
 RUN dir
+
 COPY c:\Bin c:\BinImage
+
 RUN dir
+
 FROM microsoft/nanoserver
 
 # COPY --from=SetupPhase C:\BuildTools\ C:\BuildTools\
