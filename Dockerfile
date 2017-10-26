@@ -42,7 +42,7 @@ COPY --from=SetupPhase C:\\Bin C:\\Bin
 
 # Add version label
 #LABEL "monamimani.version"="Bootstrapper15.3.26730.12"
-LABEL "monamimani.version"="$env:BuildToolsVer"
+LABEL "monamimani.version"=$env:BuildToolsVer
 
 WORKDIR c:\\SourceCode
 
