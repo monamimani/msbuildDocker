@@ -39,8 +39,9 @@ RUN dir
 
 # Add C:\Bin to PATH
 # RUN $env:Path += ";C:\Bin"
-
-COPY .\Bin c:\BinImage
+WORKDIR c:\\
+RUN dir
+COPY c:\Bin c:\BinImage
 RUN dir
 FROM microsoft/nanoserver
 
