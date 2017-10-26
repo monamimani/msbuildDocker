@@ -12,7 +12,7 @@ install:
 build_script:
  - ps: docker build -m 2GB -t monamimani/msbuild .
  - docker inspect monamimani/msbuild
- - docker inspect -format '{{ index .Config.Labels "monamimani.version"}}' monamimani/msbuild
+ - docker inspect -format '{{.Config.Labels}}' monamimani/msbuild
  - ps: docker tag monamimani/msbuild monamimani/msbuild:"$ImgVer"
 
 test_script:
