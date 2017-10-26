@@ -16,6 +16,10 @@ test_script:
   - docker inspect --format "{{ index .Config.Labels \"version\"}}" monamimani/msbuild
   - docker images
   - docker run monamimani/msbuild
+  - git clone https://github.com/monamimani/helloworld.git build
+  - cd build
+  - ps: docker run -v "$(pwd):C:\SourceCode" monamimani/msbuild msbuild helloworld.sln /p:Configuration=Release
+  
 
 deploy_script:
  - ps: docker login -u="$env:DOCKER_USER" -p="$env:DOCKER_PASS"
