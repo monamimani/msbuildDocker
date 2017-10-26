@@ -49,7 +49,7 @@ FROM microsoft/nanoserver
 RUN dir
 
 COPY --from=SetupPhase C:\\Bin C:\\Bin
-
+RUN dir
 WORKDIR c:\\SourceCode
 
 
