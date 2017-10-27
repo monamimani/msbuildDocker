@@ -13,6 +13,7 @@ build_script:
  - ps: docker build -m 2GB -t monamimani/msbuild .
  - ps: docker image inspect monamimani/msbuild
  - ps: $ImgVer = & docker inspect --format '{{index .Config.Labels \"monamimani.version\"}}' monamimani/msbuild
+ - ps: ls
  - ps: BuildToolsVer=$(cat C:\\TEMP\\BuildToolsVer)
  - ps: docker tag monamimani/msbuild monamimani/msbuild:$BuildToolsVer
 
