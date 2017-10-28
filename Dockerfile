@@ -23,7 +23,7 @@ ADD https://aka.ms/vscollect.exe C:\\TEMP\\collect.exe
 # Download the Build Tools bootstrapper outside of the PATH.
 ADD https://aka.ms/vs/15/release/vs_buildtools.exe C:\\TEMP\\vs_buildtools.exe
 
-WORKDIR c:\\TEMP\\
+WORKDIR c:\\Version\\
 RUN (get-item C:\\TEMP\\vs_buildtools.exe).VersionInfo | % FileVersion > C:\\Version\\BuildToolsVer
 
 # Install Visual Studio Build Tools
