@@ -24,7 +24,7 @@ ADD https://aka.ms/vscollect.exe C:\\TEMP\\collect.exe
 ADD https://aka.ms/vs/15/release/vs_buildtools.exe C:\\TEMP\\vs_buildtools.exe
 
 WORKDIR c:\\TEMP\\
-RUN (get-item C:\\TEMP\\vs_buildtools.exe).VersionInfo | % FileVersion > C:\\TEMP\\BuildToolsVer
+RUN (get-item C:\\TEMP\\vs_buildtools.exe).VersionInfo | % FileVersion > C:\\Version\\BuildToolsVer
 
 # Install Visual Studio Build Tools
 # RUN $VerbosePreference = 'Continue'; `
@@ -40,6 +40,10 @@ FROM microsoft/nanoserver
 COPY --from=SetupPhase ["C:\\Program Files (x86)", "C:/Program Files (x86)"]
 #COPY --from=SetupPhase ["C:\\Program Files", "C:/Program Files"]
 COPY --from=SetupPhase C:\\Bin C:\\Bin
+COPY --from=SetupPhase C:\\Version C:\\Version
+
+WORKDIR c:\\Version\\
+RUN dir
 
 # Add version label
 #LABEL "monamimani.version"="Bootstrapper15.3.26730.12"
