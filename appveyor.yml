@@ -11,18 +11,13 @@ install:
 
 build_script:
  - ps: docker build -m 2GB -t monamimani/msbuild .
- - ps: docker image inspect monamimani/msbuild
- - ps: $ImgVer = & docker inspect --format '{{index .Config.Labels \"monamimani.version\"}}' monamimani/msbuild
- - ps: docker cp monamimani/msbuild:c:\Version\ c:\Version
- - ps: BuildToolsVer=$(cat C:\\Version\\BuildToolsVer)
- - ps: docker tag monamimani/msbuild monamimani/msbuild:$BuildToolsVer
 
 test_script:
   - docker images
   - docker run monamimani/msbuild
-#  - git clone https://github.com/monamimani/helloworld.git build
-#  - cd build
-#  - ps: docker run -v "$(pwd):C:\SourceCode" monamimani/msbuild msbuild helloworld.sln /p:Configuration=Release
+  - git clone https://github.com/monamimani/helloworld.git build
+  - cd build
+  - ps: docker run -v "$(pwd):C:\SourceCode" monamimani/msbuild msbuild helloworld.sln /p:Configuration=Release
   
 
 deploy_script:
