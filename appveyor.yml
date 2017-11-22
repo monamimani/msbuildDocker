@@ -7,15 +7,26 @@ environment:
   DOCKER_PASS:
     secure: PyGoV+3PtIghP8om1bvyjg==
 install:
-  - docker version
+  - ps: docker version
 
 build_script:
-  - docker build -t monamimani/msbuild .
+ - ps: docker build -m 2GB -t monamimani/msbuild .
+ - ps: |
+     {
+     (docker inspect -f "{{index .Config.Labels \"monamimani.version\"}}" monamimani/msbuild)
+     $ImgVer = & (docker inspect -f "{{index .Config.Labels \"monamimani.version\"}}" monamimani/msbuild)
+     docker tag monamimani/msbuild monamimani/msbuild:"$ImgVer"
+     }
 
 test_script:
+  - docker images
   - docker run monamimani/msbuild
+  - git clone https://github.com/monamimani/helloworld.git build
+  - cd build
+  - ps: docker run -v "$(pwd):C:\SourceCode" monamimani/msbuild msbuild helloworld.sln /p:Configuration=Release
+  
 
 deploy_script:
-  - docker login -u="$env:DOCKER_USER" -p="$env:DOCKER_PASS"
-  - docker push monamimani/msbuild
-  - docker logout
+ - ps: docker login -u="$env:DOCKER_USER" -p="$env:DOCKER_PASS"
+ - ps: docker push monamimani/msbuild
+ - ps: docker logout
