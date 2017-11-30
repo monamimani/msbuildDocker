@@ -29,8 +29,8 @@ ADD https://aka.ms/vs/15/release/vs_buildtools.exe C:\\TEMP\\vs_buildtools.exe
     Get-ChildItem Env:;`
     if ($ret = $p.ExitCode) { c:\TEMP\collect.exe; throw ('Install failed with exit code 0x{0:x}' -f $ret) }
 
-RUN ls 'C:\\Program Files\\'
-RUN ls 'C:\\Program Files (x86)\\'
+RUN ls ['C:\\Program Files\\']
+RUN ls ['C:\\Program Files (x86)\\']
 
 # Add C:\Bin to PATH
 # RUN $env:Path += ";C:\Bin"
