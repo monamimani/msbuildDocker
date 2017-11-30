@@ -44,7 +44,7 @@ COPY --from=SetupPhase ["C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.15
 
 COPY --from=SetupPhase C:\\Bin C:\\Bin
 
-Run Get-ChildItem Env:
+RUN set
 
 # Add version label
 LABEL "monamimani.version"="Bootstrapper15.3.26730.12_Windows10SDK.15063.Desktop"
