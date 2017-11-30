@@ -25,12 +25,12 @@ ADD https://aka.ms/vs/15/release/vs_buildtools.exe C:\\TEMP\\vs_buildtools.exe
 
 # Install Visual Studio Build Tools
  RUN $VerbosePreference = 'Continue'; `
-    ls ['C:\\Program Files\\']`
-    ls ['C:\\Program Files (x86)\\']`
+    ls ['C:\\Program Files\\'];`
+    ls ['C:\\Program Files (x86)\\'];`
     $p = Start-Process -Wait -PassThru -FilePath C:\TEMP\vs_buildtools.exe -ArgumentList '--add Microsoft.VisualStudio.Workload.MSBuildTools --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.VC.140 --add Microsoft.VisualStudio.Component.Windows10SDK.15063.Desktop --quiet --wait --installPath C:\BuildTools';`
     Get-ChildItem Env:;`
-    ls ['C:\\Program Files\\']`
-    ls ['C:\\Program Files (x86)\\']`
+    ls ['C:\\Program Files\\'];`
+    ls ['C:\\Program Files (x86)\\'];`
     if ($ret = $p.ExitCode) { c:\TEMP\collect.exe; throw ('Install failed with exit code 0x{0:x}' -f $ret) }
 
 # Add C:\Bin to PATH
