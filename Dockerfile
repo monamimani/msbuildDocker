@@ -25,27 +25,34 @@ ADD https://aka.ms/vs/15/release/vs_buildtools.exe C:\\TEMP\\vs_buildtools.exe
 
 # Install Visual Studio Build Tools
  RUN $VerbosePreference = 'Continue'; `
-    $p = Start-Process -Wait -PassThru -FilePath C:\TEMP\vs_buildtools.exe -ArgumentList '--add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.VC.140 --add Microsoft.VisualStudio.Component.Windows10SDK.15063.Desktop --quiet --nocache --wait --installPath C:\BuildTools'; `
+    $p = Start-Process -Wait -PassThru -FilePath C:\TEMP\vs_buildtools.exe -ArgumentList '--add Microsoft.VisualStudio.Workload.MSBuildTools --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.VC.140 --add Microsoft.VisualStudio.Component.Windows10SDK.15063.Desktop --quiet --wait --installPath C:\BuildTools';`
+    Get-ChildItem Env:`
     if ($ret = $p.ExitCode) { c:\TEMP\collect.exe; throw ('Install failed with exit code 0x{0:x}' -f $ret) }
 
 # Add C:\Bin to PATH
 # RUN $env:Path += ";C:\Bin"
 
-FROM microsoft/nanoserver
+#FROM microsoft/nanoserver
+FROM microsoft/windowsservercore:latest
 
 COPY --from=SetupPhase C:\\BuildTools C:\\BuildTools
-COPY --from=SetupPhase ["C:\\Program Files (x86)", "C:/Program Files (x86)"]
-#COPY --from=SetupPhase ["C:\\Program Files", "C:/Program Files"]
+#COPY --from=SetupPhase ["C:\\Program Files (x86)\\Common Files", "C:/Program Files (x86)\\Common Files"]
+#COPY --from=SetupPhase ["C:\\Program Files\\Common Files", "C:/Program Files\\Common Files"]
+
+COPY --from=SetupPhase ["C:\\Program Files (x86)\\Microsoft SDKs", "C:\\Program Files (x86)\\Microsoft SDKs"]
+COPY --from=SetupPhase ["C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.15063.0", "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.15063.0"]
+
 COPY --from=SetupPhase C:\\Bin C:\\Bin
+
+Run Get-ChildItem Env:
 
 # Add version label
 LABEL "monamimani.version"="Bootstrapper15.3.26730.12_Windows10SDK.15063.Desktop"
 
 WORKDIR c:\\SourceCode
 
-# Use shell form to start developer command prompt and any other commands specified
-SHELL ["cmd.exe", "/s", "/c"]
+# Start developer command prompt with any other commands specified.
 ENTRYPOINT C:\BuildTools\Common7\Tools\VsDevCmd.bat &&
 
 # Default to PowerShell console running within developer command prompt environment
-CMD ["powershell.exe", "-nologo"]
+CMD ["powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass"]

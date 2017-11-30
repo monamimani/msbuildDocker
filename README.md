@@ -20,7 +20,7 @@ docker run -v "$(pwd):C:\SourceCode" msbuild msbuild yourproject.sln /p:Configur
 ```
 git clone https://github.com/monamimani/helloworld.git
 cd helloworld
-docker run -v "$(pwd):C:\code" monamimani/msbuild msbuild helloworld.sln /p:Configuration=Release
+docker run --rm -v "$(pwd):C:\code" monamimani/msbuild msbuild helloworld.sln /p:Configuration=Release
 dir helloworld.exe
 ```
 
@@ -36,6 +36,7 @@ dir helloworld.exe
 - [Advanced Example for Containers](https://docs.microsoft.com/en-us/visualstudio/install/advanced-build-tools-container)
 - [Known issues for containers](https://docs.microsoft.com/en-us/visualstudio/install/build-tools-container-issues)
 
+- [Visual Studio Build Tools 2017 command line argument](https://docs.microsoft.com/en-us/visualstudio/install/use-command-line-parameters-to-install-visual-studio)
 - [Visual Studio Build Tools 2017 component directory](https://docs.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-build-tools)
 - [Setup a Windows Docker CI with AppVeyor](https://stefanscherer.github.io/setup-windows-docker-ci-appveyor/)
 
