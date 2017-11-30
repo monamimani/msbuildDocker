@@ -23,6 +23,9 @@ ADD https://aka.ms/vscollect.exe C:\\TEMP\\collect.exe
 # Download the Build Tools bootstrapper outside of the PATH.
 ADD https://aka.ms/vs/15/release/vs_buildtools.exe C:\\TEMP\\vs_buildtools.exe
 
+RUN ls ['C:\\Program Files\\']
+RUN ls ['C:\\Program Files (x86)\\']
+
 # Install Visual Studio Build Tools
  RUN $VerbosePreference = 'Continue'; `
     $p = Start-Process -Wait -PassThru -FilePath C:\TEMP\vs_buildtools.exe -ArgumentList '--add Microsoft.VisualStudio.Workload.MSBuildTools --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.VC.140 --add Microsoft.VisualStudio.Component.Windows10SDK.15063.Desktop --quiet --wait --installPath C:\BuildTools';`
