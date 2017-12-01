@@ -32,7 +32,7 @@ ADD https://aka.ms/vs/15/release/vs_buildtools.exe C:\\TEMP\\vs_buildtools.exe
     ls 'C:\\Program Files (x86)\\Microsoft.NET';`
     $p = Start-Process -Wait -PassThru -FilePath C:\TEMP\vs_buildtools.exe -ArgumentList '--add Microsoft.VisualStudio.Workload.MSBuildTools --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.VC.140 --add Microsoft.VisualStudio.Component.Windows10SDK.15063.Desktop --quiet --wait --installPath C:\BuildTools';`
     #Get-ChildItem Env:;`
-    Get-ChildItem -Path . -Recurse| ? {$_.LastWriteTime -gt (Get-Date).AddDays(-1)};`
+    #Get-ChildItem -Path . -Recurse| ? {$_.LastWriteTime -gt (Get-Date).AddDays(-1)};`
     ls 'C:\\Program Files\\';`
     ls 'C:\\Program Files\\Common Files';`
     ls 'C:\\Program Files (x86)\\';`
