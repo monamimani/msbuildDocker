@@ -44,7 +44,11 @@ COPY --from=SetupPhase C:\\BuildTools C:\\BuildTools
 #COPY --from=SetupPhase ["C:\\Program Files\\Common Files", "C:/Program Files\\Common Files"]
 
 COPY --from=SetupPhase ["C:\\Program Files (x86)\\Microsoft SDKs", "C:\\Program Files (x86)\\Microsoft SDKs"]
-COPY --from=SetupPhase ["C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.15063.0", "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.15063.0"]
+COPY --from=SetupPhase ["C:\\Program Files (x86)\\Microsoft Visual Studio", "C:\\Program Files (x86)\\Microsoft Visual Studio"]
+COPY --from=SetupPhase ["C:\\Program Files (x86)\\Microsoft Visual Studio 14.0", "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0"]
+COPY --from=SetupPhase ["C:\\Program Files (x86)\\MSBuild", "C:\\Program Files (x86)\\MSBuild"]
+COPY --from=SetupPhase ["C:\\Program Files (x86)\\Reference Assemblies", "C:\\Program Files (x86)\\Reference Assemblies"]
+COPY --from=SetupPhase ["C:\\Program Files (x86)\\Windows Kits", "C:\\Program Files (x86)\\Windows Kits"]
 
 COPY --from=SetupPhase C:\\Bin C:\\Bin
 
