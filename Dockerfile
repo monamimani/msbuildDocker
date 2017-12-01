@@ -62,6 +62,8 @@ COPY --from=SetupPhase ["C:\\Program Files (x86)\\MSBuild", "C:\\Program Files (
 COPY --from=SetupPhase ["C:\\Program Files (x86)\\Reference Assemblies", "C:\\Program Files (x86)\\Reference Assemblies"]
 COPY --from=SetupPhase ["C:\\Program Files (x86)\\Windows Kits", "C:\\Program Files (x86)\\Windows Kits"]
 
+RUN attrib -h -r -s "C:\\Program Files (x86)\\WindowsPowerShell\\Modules" /s
+
 COPY --from=SetupPhase ["C:\\Program Files (x86)\\WindowsPowerShell\\Modules", "C:\\Program Files (x86)\\WindowsPowerShell\\Modules"]
 
 COPY --from=SetupPhase ["C:\\Windows", "C:\\Windows"]
