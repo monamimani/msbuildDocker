@@ -46,10 +46,12 @@ ADD https://aka.ms/vs/15/release/vs_buildtools.exe C:\\TEMP\\vs_buildtools.exe
 FROM microsoft/windowsservercore:latest
 
 COPY --from=SetupPhase C:\\BuildTools C:\\BuildTools
-#COPY --from=SetupPhase ["C:\\Program Files (x86)\\Common Files", "C:/Program Files (x86)\\Common Files"]
+
 #COPY --from=SetupPhase ["C:\\Program Files\\Common Files", "C:/Program Files\\Common Files"]
 
-COPY --from=SetupPhase ["C:\\Program Files (x86)\\Common Files", "C:\\Program Files (x86)\\Common Files"]
+COPY --from=SetupPhase ["C:\\Program Files (x86)\\Common Files\\Merge Modules", "C:\\Program Files (x86)\\Common Files\\Merge Modules"]
+COPY --from=SetupPhase ["C:\\Program Files (x86)\\Common Files\\Microsoft", "C:\\Program Files (x86)\\Common Files\\Microsoft"]
+COPY --from=SetupPhase ["C:\\Program Files (x86)\\Common Files\\Microsoft Shared", "C:\\Program Files (x86)\\Common Files\\Microsoft Shared"]
 COPY --from=SetupPhase ["C:\\Program Files (x86)\\Microsoft SDKs", "C:\\Program Files (x86)\\Microsoft SDKs"]
 COPY --from=SetupPhase ["C:\\Program Files (x86)\\Microsoft Visual Studio", "C:\\Program Files (x86)\\Microsoft Visual Studio"]
 COPY --from=SetupPhase ["C:\\Program Files (x86)\\Microsoft Visual Studio 14.0", "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0"]
