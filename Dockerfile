@@ -46,6 +46,7 @@ ADD https://aka.ms/vs/15/release/vs_buildtools.exe C:\\TEMP\\vs_buildtools.exe
 #FROM microsoft/nanoserver
 FROM microsoft/windowsservercore:latest
 
+COPY --from=SetupPhase C:\\Bin C:\\Bin
 COPY --from=SetupPhase C:\\BuildTools C:\\BuildTools
 
 #COPY --from=SetupPhase ["C:\\Program Files\\Common Files", "C:/Program Files\\Common Files"]
@@ -60,7 +61,9 @@ COPY --from=SetupPhase ["C:\\Program Files (x86)\\MSBuild", "C:\\Program Files (
 COPY --from=SetupPhase ["C:\\Program Files (x86)\\Reference Assemblies", "C:\\Program Files (x86)\\Reference Assemblies"]
 COPY --from=SetupPhase ["C:\\Program Files (x86)\\Windows Kits", "C:\\Program Files (x86)\\Windows Kits"]
 
-COPY --from=SetupPhase C:\\Bin C:\\Bin
+COPY --from=SetupPhase ["C:\\Program Files (x86)\\WindowsPowerShell\\Modules", "C:\\Program Files (x86)\\WindowsPowerShell\\Modules"]
+
+COPY --from=SetupPhase ["C:\\Windows", "C:\\Windows"]
 
 RUN set
 
