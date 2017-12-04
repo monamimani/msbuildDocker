@@ -40,6 +40,7 @@ ADD https://aka.ms/vs/15/release/vs_buildtools.exe C:\\TEMP\\vs_buildtools.exe
     # ls 'C:\\Program Files (x86)\\Microsoft.NET';`
     if ($ret = $p.ExitCode) { c:\TEMP\collect.exe; throw ('Install failed with exit code 0x{0:x}' -f $ret) }
 
+RUN icacls 'C:\\Program Files (x86)\\WindowsPowerShell\\Modules' /reset /t /c /q 
 RUN attrib -h -r -s 'C:\\Program Files (x86)\\WindowsPowerShell\\Modules' /s
 
 # Add C:\Bin to PATH
@@ -63,6 +64,7 @@ COPY --from=SetupPhase ["C:\\Program Files (x86)\\MSBuild", "C:\\Program Files (
 COPY --from=SetupPhase ["C:\\Program Files (x86)\\Reference Assemblies", "C:\\Program Files (x86)\\Reference Assemblies"]
 COPY --from=SetupPhase ["C:\\Program Files (x86)\\Windows Kits", "C:\\Program Files (x86)\\Windows Kits"]
 
+RUN icacls "C:\\Program Files (x86)\\WindowsPowerShell\\Modules" /reset /t /c /q 
 RUN attrib -h -r -s "C:\\Program Files (x86)\\WindowsPowerShell\\Modules" /s
 
 COPY --from=SetupPhase ["C:\\Program Files (x86)\\WindowsPowerShell\\Modules", "C:\\Program Files (x86)\\WindowsPowerShell\\Modules"]
