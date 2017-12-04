@@ -69,8 +69,8 @@ RUN attrib -h -r -s "C:\\Program Files (x86)\\WindowsPowerShell\\Modules" /s
 
 COPY --from=SetupPhase ["C:\\Program Files (x86)\\WindowsPowerShell\\Modules", "C:\\Program Files (x86)\\WindowsPowerShell\\Modules"]
 
-RUN icacls "C:\\Windows" /reset /t /c /q 
-COPY --from=SetupPhase ["C:\\Windows", "C:\\Windows"]
+#RUN icacls "C:\\Windows" /reset /t /c /q 
+#COPY --from=SetupPhase ["C:\\Windows", "C:\\Windows"]
 
 RUN set
 
