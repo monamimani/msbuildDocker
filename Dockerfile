@@ -38,8 +38,9 @@ ADD https://aka.ms/vs/15/release/vs_buildtools.exe C:\\TEMP\\vs_buildtools.exe
     # ls 'C:\\Program Files (x86)\\';`
     # ls 'C:\\Program Files (x86)\\Common Files';`
     # ls 'C:\\Program Files (x86)\\Microsoft.NET';`
-    attrib -h -r -s 'C:\\Program Files (x86)\\WindowsPowerShell\\Modules' /s;`
     if ($ret = $p.ExitCode) { c:\TEMP\collect.exe; throw ('Install failed with exit code 0x{0:x}' -f $ret) }
+
+RUN attrib -h -r -s 'C:\\Program Files (x86)\\WindowsPowerShell\\Modules' /s
 
 # Add C:\Bin to PATH
 # RUN $env:Path += ";C:\Bin"
