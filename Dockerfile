@@ -43,6 +43,8 @@ ADD https://aka.ms/vs/15/release/vs_buildtools.exe C:\\TEMP\\vs_buildtools.exe
 RUN icacls 'C:\\Program Files (x86)\\WindowsPowerShell\\Modules' /reset /t /c /q 
 RUN attrib -h -r -s 'C:\\Program Files (x86)\\WindowsPowerShell\\Modules' /s
 
+RUN attrib -h -r -s "C:\\Windows" /s
+
 # Add C:\Bin to PATH
 # RUN $env:Path += ";C:\Bin"
 
@@ -69,8 +71,8 @@ RUN attrib -h -r -s "C:\\Program Files (x86)\\WindowsPowerShell\\Modules" /s
 
 COPY --from=SetupPhase ["C:\\Program Files (x86)\\WindowsPowerShell\\Modules", "C:\\Program Files (x86)\\WindowsPowerShell\\Modules"]
 
-#RUN icacls "C:\\Windows" /reset /t /c /q 
-#COPY --from=SetupPhase ["C:\\Windows", "C:\\Windows"]
+RUN attrib -h -r -s "C:\\Windows" /s
+COPY --from=SetupPhase ["C:\\Windows", "C:\\Windows"]
 
 RUN set
 
