@@ -38,6 +38,7 @@ ADD https://aka.ms/vs/15/release/vs_buildtools.exe C:\\TEMP\\vs_buildtools.exe
     # ls 'C:\\Program Files (x86)\\';`
     # ls 'C:\\Program Files (x86)\\Common Files';`
     # ls 'C:\\Program Files (x86)\\Microsoft.NET';`
+    Get-ItemProperty 'hklm:\software\microsoft\Windows Kits\Installed Roots';`
     if ($ret = $p.ExitCode) { c:\TEMP\collect.exe; throw ('Install failed with exit code 0x{0:x}' -f $ret) }
 
 RUN icacls 'C:\\Program Files (x86)\\WindowsPowerShell\\Modules' /reset /t /c /q 
@@ -78,6 +79,14 @@ COPY --from=SetupPhase ["C:\\Program Files (x86)\\WindowsPowerShell\\Modules", "
 RUN icacls "C:\\Windows\\assembly" /reset /t /c /q 
 RUN attrib -h -r -s "C:\\Windows\\assembly" /s
 COPY --from=SetupPhase ["C:\\Windows\\assembly", "C:\\Windows\\assembly"]
+
+RUN icacls "C:\\Windows\\Microsoft.NET" /reset /t /c /q 
+RUN attrib -h -r -s "C:\\Windows\\Microsoft.NET" /s
+COPY --from=SetupPhase ["C:\\Windows\\Microsoft.NET", "C:\\Windows\\Microsoft.NET"]
+
+RUN icacls "C:\\Windows\\System32" /reset /t /c /q 
+RUN attrib -h -r -s "C:\\Windows\\System32" /s
+COPY --from=SetupPhase ["C:\\Windows\\System32", "C:\\Windows\\System32"]
 
 RUN set
 
