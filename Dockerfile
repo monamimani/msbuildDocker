@@ -52,7 +52,7 @@ RUN attrib -h -r -s "C:/Windows" /s
 #FROM microsoft/nanoserver
 FROM microsoft/windowsservercore:latest
 
-RUN REG QUERY "HKLM\\software\\microsoft\\Windows Kits\\Installed Roots" /s
+RUN REG QUERY "HKLM\software\microsoft\Windows Kits\Installed Roots" /s
 
 COPY --from=SetupPhase C:\\Bin C:\\Bin
 COPY --from=SetupPhase C:\\BuildTools C:\\BuildTools
